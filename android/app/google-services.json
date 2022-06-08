@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "690132400933",
+    "project_id": "projectciplified",
+    "storage_bucket": "projectciplified.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:690132400933:android:54d3a6e40041edf5a038cc",
+        "android_client_info": {
+          "package_name": "com.example.projectciplified"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "690132400933-ljvio6nuatgddct07mc80gbi6mr1pr2o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUY1IciJh9tDrZcLLbEbeAKFpPw7g4xoU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "690132400933-ljvio6nuatgddct07mc80gbi6mr1pr2o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
