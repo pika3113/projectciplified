@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projectciplified/screens/intro_screens/onboarding_page.dart';
 import 'package:projectciplified/screens/login_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:projectciplified/screens/main_page.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MainPage(),
+      home: OnBoardingScreen(),
     );
   }
 }
