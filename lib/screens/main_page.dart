@@ -25,7 +25,7 @@ class _MainPageState extends State<MainPage> {
           if (snapshot.hasData) {
             return HomePage();
           } else {
-            return AuthPage();
+            return OnBoardingScreen();
           }
         },
       ),
