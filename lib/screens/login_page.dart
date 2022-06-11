@@ -91,12 +91,10 @@ class _LoginPageState extends State<LoginPage> {
                               return null;
                             } else if (value.length < 4 && value.isNotEmpty) {
                               return 'Invalid email';
-                            } else if (value.contains('@')) {
-                              return null;
                             } else if (value.isEmpty) {
                               return 'Enter email';
                             } else {
-                              return 'Invalid email';
+                              return null;
                             }
                           },
                           controller: _emailcontroller,

@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:projectciplified/screens/navbar%20screens/controlling_page.dart';
 
 class RegisterPage extends StatefulWidget {
   final VoidCallback showLoginPage;
@@ -24,7 +25,6 @@ class _RegisterPageState extends State<RegisterPage> {
   final _firstNamecontroller = TextEditingController();
   final _lastNamecontroller = TextEditingController();
   final _agecontroller = TextEditingController();
-  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
   Future signUp() async {
     //create user
@@ -77,6 +77,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
     return Scaffold(
       backgroundColor: Colors.grey[300],
       body: SafeArea(
@@ -128,7 +129,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           validator: (value) {
                             if (value!.isNotEmpty && value.length > 3) {
                               return null;
-                            } else if (value.length < 1 && value.isNotEmpty) {
+                            } else if (value.length < 2 && value.isNotEmpty) {
                               return 'Invalid first name';
                             } else if (value.isEmpty) {
                               return 'Enter first name';

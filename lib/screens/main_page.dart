@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:projectciplified/screens/home_page.dart';
+import 'package:projectciplified/screens/navbar%20screens/controlling_page.dart';
 import 'package:projectciplified/screens/login_page.dart';
 import 'package:projectciplified/screens/intro_screens/onboarding_page.dart';
 
@@ -23,9 +23,9 @@ class _MainPageState extends State<MainPage> {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return HomePage();
+            return ControllingPage();
           } else {
-            return OnBoardingScreen();
+            return AuthPage();
           }
         },
       ),
