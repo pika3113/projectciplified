@@ -24,7 +24,13 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  bool _passwordVisible = false;
+
   @override
+  void initState() {
+    _passwordVisible = true;
+  }
+
   void dispose() {
     _emailcontroller.dispose();
     _passwordcontroller.dispose();
@@ -99,8 +105,9 @@ class _LoginPageState extends State<LoginPage> {
                           },
                           controller: _emailcontroller,
                           decoration: InputDecoration(
+                            labelText: 'Email',
                             border: InputBorder.none,
-                            hintText: 'Email',
+                            hintText: 'Enter email',
                           ),
                         ),
                       ),
@@ -135,10 +142,26 @@ class _LoginPageState extends State<LoginPage> {
                             }
                           },
                           controller: _passwordcontroller,
-                          obscureText: true,
+                          obscureText: _passwordVisible,
                           decoration: InputDecoration(
+                            labelText: 'Password',
                             border: InputBorder.none,
-                            hintText: 'Password',
+                            hintText: 'Enter password',
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                //Based on passwordvisible state choose the icon
+                                _passwordVisible
+                                    ? Icons.visibility_off_rounded
+                                    : Icons.visibility_rounded,
+                                color: Theme.of(context).primaryColorDark,
+                              ),
+                              onPressed: () {
+                                //Update the state ie toggle the state of passwordVisible variable
+                                setState(() {
+                                  _passwordVisible = !_passwordVisible;
+                                });
+                              },
+                            ),
                           ),
                         ),
                       ),

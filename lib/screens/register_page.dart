@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +25,6 @@ class _RegisterPageState extends State<RegisterPage> {
   final _passwordcontroller = TextEditingController();
   final _cfmpasswordcontroller = TextEditingController();
   final _firstNamecontroller = TextEditingController();
-  final _lastNamecontroller = TextEditingController();
   final _agecontroller = TextEditingController();
 
   Future signUp() async {
@@ -37,7 +38,6 @@ class _RegisterPageState extends State<RegisterPage> {
       //add user details
       addUserDetails(
         _firstNamecontroller.text.trim(),
-        _lastNamecontroller.text.trim(),
         _emailcontroller.text.trim(),
         int.parse(
           _agecontroller.text.trim(),
@@ -46,11 +46,12 @@ class _RegisterPageState extends State<RegisterPage> {
     }
   }
 
-  Future addUserDetails(
-      String firstName, String lastName, String email, int age) async {
-    await FirebaseFirestore.instance.collection('users').add({
-      'first name': firstName,
-      'last name': lastName,
+  Future addUserDetails(String name, String email, int age) async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(_emailcontroller.text.trim())
+        .set({
+      'name': name,
       'email': email,
       'age': age,
     });
@@ -65,12 +66,19 @@ class _RegisterPageState extends State<RegisterPage> {
     }
   }
 
+  bool _passwordVisible = false;
+  bool _1passwordVisible = false;
+
   @override
+  void initState() {
+    _passwordVisible = true;
+    _1passwordVisible = true;
+  }
+
   void dispose() {
     _emailcontroller.dispose();
     _passwordcontroller.dispose();
     _firstNamecontroller.dispose();
-    _lastNamecontroller.dispose();
     _agecontroller.dispose();
     super.dispose();
   }
@@ -111,7 +119,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     height: 50,
                   ),
                   //textfields
-                  //first name textfield
+                  //name textfield
 
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -127,12 +135,12 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         child: TextFormField(
                           validator: (value) {
-                            if (value!.isNotEmpty && value.length > 3) {
+                            if (value!.isNotEmpty && value.length > 6) {
                               return null;
-                            } else if (value.length < 2 && value.isNotEmpty) {
-                              return 'Invalid first name';
+                            } else if (value.length < 5 && value.isNotEmpty) {
+                              return 'Name too short';
                             } else if (value.isEmpty) {
-                              return 'Enter first name';
+                              return 'Enter name';
                             } else {
                               return null;
                             }
@@ -140,7 +148,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           controller: _firstNamecontroller,
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'First Name',
+                            hintText: 'Enter name',
+                            labelText: 'Name',
                           ),
                         ),
                       ),
@@ -150,45 +159,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   SizedBox(
                     height: 10,
                   ),
-                  //lastname textfield
 
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        border: Border.all(color: Colors.white),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          left: 20.0,
-                        ),
-                        child: TextFormField(
-                          validator: (value) {
-                            if (value!.isNotEmpty && value.length > 3) {
-                              return null;
-                            } else if (value.length < 1 && value.isNotEmpty) {
-                              return 'Invalid last name';
-                            } else if (value.isEmpty) {
-                              return 'Enter last name';
-                            } else {
-                              return null;
-                            }
-                          },
-                          controller: _lastNamecontroller,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'Last Name',
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  SizedBox(
-                    height: 10,
-                  ),
                   //age textfield
 
                   Padding(
@@ -220,9 +191,9 @@ class _RegisterPageState extends State<RegisterPage> {
                           },
                           controller: _agecontroller,
                           decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'Age',
-                          ),
+                              border: InputBorder.none,
+                              hintText: 'Enter age',
+                              labelText: 'Age'),
                         ),
                       ),
                     ),
@@ -264,7 +235,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           controller: _emailcontroller,
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'Email',
+                            hintText: 'Enter email',
+                            labelText: 'Email',
                           ),
                         ),
                       ),
@@ -299,10 +271,26 @@ class _RegisterPageState extends State<RegisterPage> {
                             }
                           },
                           controller: _passwordcontroller,
-                          obscureText: true,
+                          obscureText: _passwordVisible,
                           decoration: InputDecoration(
+                            labelText: 'Password',
                             border: InputBorder.none,
-                            hintText: 'Password',
+                            hintText: 'Enter password',
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                //Based on passwordvisible state choose the icon
+                                _passwordVisible
+                                    ? Icons.visibility_off_rounded
+                                    : Icons.visibility_rounded,
+                                color: Theme.of(context).primaryColorDark,
+                              ),
+                              onPressed: () {
+                                //Update the state ie toggle the state of passwordVisible variable
+                                setState(() {
+                                  _passwordVisible = !_passwordVisible;
+                                });
+                              },
+                            ),
                           ),
                         ),
                       ),
@@ -329,18 +317,35 @@ class _RegisterPageState extends State<RegisterPage> {
                         child: TextFormField(
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return "Enter password";
-                            } else if (value.length < 6) {
-                              return 'Password has to be longer than 6 characters';
+                              return "Enter your password again";
+                            } else if (_passwordcontroller.text.trim() !=
+                                _cfmpasswordcontroller.text.trim()) {
+                              return 'Passwords do not match';
                             } else {
                               return null;
                             }
                           },
                           controller: _cfmpasswordcontroller,
-                          obscureText: true,
+                          obscureText: _1passwordVisible,
                           decoration: InputDecoration(
+                            labelText: 'Confirm password',
                             border: InputBorder.none,
-                            hintText: 'Confirm Password',
+                            hintText: 'Enter password again',
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                //Based on passwordvisible state choose the icon
+                                _1passwordVisible
+                                    ? Icons.visibility_off_rounded
+                                    : Icons.visibility_rounded,
+                                color: Theme.of(context).primaryColorDark,
+                              ),
+                              onPressed: () {
+                                //Update the state ie toggle the state of passwordVisible variable
+                                setState(() {
+                                  _1passwordVisible = !_1passwordVisible;
+                                });
+                              },
+                            ),
                           ),
                         ),
                       ),
