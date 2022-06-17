@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:projectciplified/screens/navbar%20screens/activites_page.dart';
 import 'package:projectciplified/screens/navbar%20screens/make_activity_page.dart';
+import 'package:projectciplified/screens/navbar%20screens/my/my_activities.dart';
 import 'package:projectciplified/screens/navbar%20screens/user_settings_page.dart';
-import 'package:projectciplified/screens/read%20data/get_user_name.dart';
 
 class ControllingPage extends StatefulWidget {
   const ControllingPage({Key? key}) : super(key: key);
@@ -32,6 +32,7 @@ class _ControllingPageState extends State<ControllingPage> {
   final List<Widget> _pages = [
     Activities(),
     HomePage(),
+    MyActivities(),
     UserSettings(),
   ];
   @override
@@ -47,6 +48,9 @@ class _ControllingPageState extends State<ControllingPage> {
               icon: Icon(Icons.local_activity), label: 'Activities'),
           BottomNavigationBarItem(
               icon: Icon(Icons.add_box_rounded), label: 'New activity'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.my_library_books_rounded),
+              label: 'My Activities'),
           BottomNavigationBarItem(
               icon: Icon(Icons.settings), label: 'Settings'),
         ],

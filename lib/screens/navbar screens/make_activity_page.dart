@@ -3,6 +3,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:projectciplified/screens/main_page.dart';
+import 'package:projectciplified/screens/navbar%20screens/controlling_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -53,12 +55,13 @@ class _HomePageState extends State<HomePage> {
 
   Widget build(BuildContext context) {
     final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+
     return Scaffold(
       appBar: AppBar(
         leading: (Icon(Icons.add_box_rounded)),
         centerTitle: true,
         title: Text(
-          user.email!,
+          user.email.toString(),
           //user.email!,
           style: TextStyle(fontSize: 16),
         ),
@@ -129,7 +132,7 @@ class _HomePageState extends State<HomePage> {
                             if (value!.isNotEmpty && value.length < 21) {
                               return null;
                             }
-                            if (value.length > 20) {
+                            if (value.length > 50) {
                               return 'Title too long';
                             } else if (value.isEmpty) {
                               return 'Enter title';
@@ -168,9 +171,9 @@ class _HomePageState extends State<HomePage> {
                           keyboardType: TextInputType.multiline,
                           maxLines: null,
                           validator: (value) {
-                            if (value!.isNotEmpty && value.length < 201) {
+                            if (value!.isNotEmpty && value.length < 1001) {
                               return null;
-                            } else if (value.length > 200) {
+                            } else if (value.length > 1000) {
                               return 'Description too long';
                             } else if (value.isEmpty) {
                               return 'Enter description';
@@ -246,6 +249,12 @@ class _HomePageState extends State<HomePage> {
                           ),
                         );
                         submit();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ControllingPage(),
+                          ),
+                        );
                       },
                       child: Container(
                         padding: EdgeInsets.all(
