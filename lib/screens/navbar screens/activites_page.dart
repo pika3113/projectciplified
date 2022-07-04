@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:projectciplified/screens/read%20data/get_activities_auth.dart';
 import 'package:projectciplified/screens/read%20data/get_activities_desc.dart';
+import 'package:projectciplified/screens/read%20data/get_activities_email.dart';
+import 'package:projectciplified/screens/read%20data/get_activities_num.dart';
 import 'package:projectciplified/screens/read%20data/get_activities_title.dart';
 //import 'dart:html';
 
@@ -20,11 +22,11 @@ class _ActivitiesState extends State<Activities> {
   List<String> docIDs = [];
 
   //get docIDs
+
   Future getDocID() async {
     await FirebaseFirestore.instance.collection('activities').get().then(
           (snapshot) => snapshot.docs.forEach(
             (document) {
-              print(document.reference);
               docIDs.add(document.reference.id);
             },
           ),
@@ -70,82 +72,74 @@ class _ActivitiesState extends State<Activities> {
                   return ListView.builder(
                     itemCount: docIDs.length,
                     itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 8),
-                        child: ListTile(
-                          dense: true,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)),
-                          tileColor: Color.fromARGB(255, 235, 235, 235),
-                          title: Column(
-                            children: [
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Title(
-                                  color: Colors.black,
-                                  child:
-                                      GetActivities(documentID: docIDs[index]),
+                      return GestureDetector(
+                        onTap: () {
+                          print(docIDs[index]); //title
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 8),
+                          child: ListTile(
+                            dense: true,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8)),
+                            tileColor: Color.fromARGB(255, 235, 235, 235),
+                            title: Column(
+                              children: [
+                                SizedBox(
+                                  height: 5,
                                 ),
-                              ),
-                              Align(
-                                alignment: Alignment.centerRight,
-                                child: GetActivitiesAuth(
-                                    documentID: docIDs[index]),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: GetActivitiesDesc(
-                                    documentID: docIDs[index]),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              //sign up for the activity
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 90),
-                                child: Align(
+                                Align(
                                   alignment: Alignment.centerLeft,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(0.0),
-                                    child: GestureDetector(
-                                      onTap: () {},
-                                      child: Container(
-                                        padding: EdgeInsets.all(
-                                          10,
-                                        ),
-                                        decoration: BoxDecoration(
-                                          color: Colors.deepPurple,
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            'Register',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 10,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                                  child: Title(
+                                    color: Colors.black,
+                                    child: GetActivities(
+                                        documentID: docIDs[index]),
                                   ),
                                 ),
-                              ),
-                            ],
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: GetActivitiesAuth(
+                                      documentID: docIDs[index]),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: GetActivitiesDesc(
+                                      documentID: docIDs[index]),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                //email
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: GetActivitiesEmail(
+                                      documentID: docIDs[index]),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                //phone number
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: GetActivitiesNum(
+                                      documentID: docIDs[index]),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                //sign up for the activity
+                                //'stuff already inside + 'user name' submit it to the thing .doc('')
+                              ],
+                            ),
                           ),
                         ),
+
+//delete here if needed^^
                       );
-                      // );
                     },
                   );
                 },

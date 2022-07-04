@@ -218,16 +218,16 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         child: TextFormField(
                           validator: (value) {
-                            if (value!.isNotEmpty &&
+                            if (!value!.contains('hci.edu.sg')) {
+                              return 'you are not allowed to create an account';
+                            } else if (value.length < 4 && value.isNotEmpty) {
+                              return 'Invalid email';
+                            } else if (value.isEmpty) {
+                              return 'Enter email';
+                            } else if (value!.isNotEmpty &&
                                 value.length > 3 &&
                                 value.contains('@')) {
                               return null;
-                            } else if (value.length < 4 && value.isNotEmpty) {
-                              return 'Invalid email';
-                            } else if (value.contains('@')) {
-                              return null;
-                            } else if (value.isEmpty) {
-                              return 'Enter email';
                             } else {
                               return 'Invalid email';
                             }

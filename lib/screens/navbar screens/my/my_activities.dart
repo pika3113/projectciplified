@@ -39,6 +39,7 @@ class _MyActivitiesState extends State<MyActivities> {
           ),
         ],
       ),
+      // find the documents that have user name, list out with the people interested
     );
   }
 }

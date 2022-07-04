@@ -19,6 +19,7 @@ class _HomePageState extends State<HomePage> {
   final _titleController = TextEditingController();
   final _descController = TextEditingController();
   final _nameController = TextEditingController();
+  final _numController = TextEditingController();
 
   Future submit() async {
     await FirebaseAuth.instance;
@@ -27,12 +28,13 @@ class _HomePageState extends State<HomePage> {
       _descController.text.trim(),
       user.email.toString().trim(),
       _nameController.text.trim(),
+      _numController.text.trim(),
     );
   }
 
 //addding activity
-  Future addCIPDetails(
-      String title, String desc, String email, String name) async {
+  Future addCIPDetails(String title, String desc, String email, String name,
+      String number) async {
     await FirebaseFirestore.instance
         .collection('activities')
         .doc(
@@ -43,6 +45,7 @@ class _HomePageState extends State<HomePage> {
       'description': desc,
       'email': email,
       'name': name,
+      'number': number,
     });
   }
 
@@ -227,6 +230,47 @@ class _HomePageState extends State<HomePage> {
                             labelText: 'Name',
                             border: InputBorder.none,
                             hintText: 'Your name',
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  //phone number
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        border: Border.all(color: Colors.white),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          left: 20.0,
+                          bottom: 5,
+                        ),
+                        child: TextFormField(
+                          maxLines: null,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return null;
+                            } else if (value
+                                .contains(RegExp(r'^[A-Za-z0-9_.]+$'))) {
+                              return 'Invalid phone number';
+                            } else if (value.length == 8) {
+                              return null;
+                            } else {
+                              return 'Invalid phone number';
+                            }
+                          },
+                          controller: _numController,
+                          decoration: InputDecoration(
+                            labelText: 'Phone number',
+                            border: InputBorder.none,
+                            hintText: 'Leave blank if not needed',
                           ),
                         ),
                       ),
