@@ -76,6 +76,7 @@ class _ActivitiesState extends State<Activities> {
                         onTap: () {
                           print(docIDs[index]); //title
                         },
+
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                               vertical: 10, horizontal: 8),
@@ -84,56 +85,74 @@ class _ActivitiesState extends State<Activities> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8)),
                             tileColor: Color.fromARGB(255, 235, 235, 235),
-                            title: Column(
-                              children: [
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Title(
-                                    color: Colors.black,
-                                    child: GetActivities(
+                            title: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Title(
+                                      color: Colors.black,
+                                      child: GetActivities(
+                                          documentID: docIDs[index]),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: Alignment.centerRight,
+                                    child: GetActivitiesAuth(
                                         documentID: docIDs[index]),
                                   ),
-                                ),
-                                Align(
-                                  alignment: Alignment.centerRight,
-                                  child: GetActivitiesAuth(
-                                      documentID: docIDs[index]),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: GetActivitiesDesc(
-                                      documentID: docIDs[index]),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                //email
-                                Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: GetActivitiesEmail(
-                                      documentID: docIDs[index]),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                //phone number
-                                Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: GetActivitiesNum(
-                                      documentID: docIDs[index]),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                //sign up for the activity
-                                //'stuff already inside + 'user name' submit it to the thing .doc('')
-                              ],
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+
+                                  Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: GetActivitiesDesc(
+                                        documentID: docIDs[index]),
+                                  ),
+
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  //contact details
+                                  Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      'Contact details',
+                                      style: TextStyle(fontSize: 13),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  //email
+                                  Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: GetActivitiesEmail(
+                                        documentID: docIDs[index]),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  //phone number
+                                  Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: GetActivitiesNum(
+                                        documentID: docIDs[index]),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+
+                                  //sign up for the activity
+                                  //'stuff already inside + 'user name' submit it to the thing .doc('')
+                                ],
+                              ),
                             ),
                           ),
                         ),

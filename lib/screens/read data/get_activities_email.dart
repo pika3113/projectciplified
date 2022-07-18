@@ -22,7 +22,10 @@ class GetActivitiesEmail extends StatelessWidget {
 
           return Text(
             'Email: ${data['email']}',
-            style: TextStyle(fontSize: 12),
+            style: TextStyle(
+                fontSize: 12,
+                fontFamily: 'Quicksand',
+                fontWeight: FontWeight.w600),
           );
         }
         return Text('loading...');

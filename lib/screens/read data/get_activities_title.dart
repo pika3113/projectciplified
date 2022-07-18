@@ -21,7 +21,7 @@ class GetActivities extends StatelessWidget {
               snapshot.data!.data() as Map<String, dynamic>;
           return Text(
             '${data['title']}',
-            style: TextStyle(fontSize: 18),
+            style: TextStyle(fontSize: 18, fontFamily: 'Paytone'),
           );
         }
         return Text('loading...');

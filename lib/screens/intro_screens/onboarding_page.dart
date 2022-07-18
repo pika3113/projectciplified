@@ -6,10 +6,10 @@ import 'package:projectciplified/auth/auth_page.dart';
 import 'package:projectciplified/screens/intro_screens/intro_page1.dart';
 import 'package:projectciplified/screens/intro_screens/intro_page2.dart';
 import 'package:projectciplified/screens/intro_screens/intro_page3.dart';
-import 'package:projectciplified/screens/login_page.dart';
-import 'package:projectciplified/screens/main_page.dart';
+import 'package:projectciplified/auth_screens/login_page.dart';
+import 'package:projectciplified/main_page.dart';
 import 'package:projectciplified/screens/navbar%20screens/controlling_page.dart';
-import 'package:projectciplified/screens/register_page.dart';
+import 'package:projectciplified/auth_screens/register_page.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingScreen extends StatefulWidget {

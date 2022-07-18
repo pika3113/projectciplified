@@ -21,7 +21,10 @@ class GetActivitiesAuth extends StatelessWidget {
               snapshot.data!.data() as Map<String, dynamic>;
           return Text(
             'Author: ${data['name']}',
-            style: TextStyle(fontSize: 12),
+            style: TextStyle(
+                fontSize: 12,
+                fontFamily: 'Quicksand',
+                fontWeight: FontWeight.w600),
           );
         }
         return Text('loading...');

@@ -20,11 +20,20 @@ class GetActivitiesNum extends StatelessWidget {
           Map<String, dynamic> data =
               snapshot.data!.data() as Map<String, dynamic>;
           if (data['name'].toString().contains('n')) {
-            return Text('Phone number not available');
+            return Text(
+              'Phone number not available',
+              style: TextStyle(
+                  fontSize: 12,
+                  fontFamily: 'Quicksand',
+                  fontWeight: FontWeight.w600),
+            );
           } else {
             return Text(
               'Phone number: ${data['number']}',
-              style: TextStyle(fontSize: 12),
+              style: TextStyle(
+                  fontSize: 12,
+                  fontFamily: 'Quicksand',
+                  fontWeight: FontWeight.w600),
             );
           }
         }

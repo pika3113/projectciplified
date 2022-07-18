@@ -3,7 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:projectciplified/screens/main_page.dart';
+import 'package:projectciplified/main_page.dart';
 import 'package:projectciplified/screens/navbar%20screens/controlling_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -66,14 +66,20 @@ class _HomePageState extends State<HomePage> {
         title: Text(
           user.email.toString(),
           //user.email!,
-          style: TextStyle(fontSize: 16),
+          style: TextStyle(
+              fontSize: 16,
+              fontFamily: 'Quicksand',
+              fontWeight: FontWeight.w600),
         ),
         actions: [
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 21.5, 4, 0),
             child: Text(
               "Sign out",
-              style: TextStyle(fontSize: 12),
+              style: TextStyle(
+                  fontSize: 12,
+                  fontFamily: 'Quicksand',
+                  fontWeight: FontWeight.w600),
             ),
           ),
           GestureDetector(
@@ -109,7 +115,10 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Text(
                     'Make a CIP activity for others to participate in!',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'Quicksand',
+                        fontWeight: FontWeight.w600),
                   ),
                   SizedBox(
                     height: 20,
@@ -129,6 +138,9 @@ class _HomePageState extends State<HomePage> {
                           left: 20.0,
                         ),
                         child: TextFormField(
+                          style: TextStyle(
+                              fontFamily: 'Quicksand',
+                              fontWeight: FontWeight.w600),
                           keyboardType: TextInputType.multiline,
                           maxLines: null,
                           validator: (value) {
@@ -147,7 +159,7 @@ class _HomePageState extends State<HomePage> {
                           decoration: InputDecoration(
                             labelText: 'Title',
                             border: InputBorder.none,
-                            hintText: 'The main tittle of your activity',
+                            hintText: 'The main title of your activity',
                           ),
                         ),
                       ),
@@ -171,6 +183,9 @@ class _HomePageState extends State<HomePage> {
                           bottom: 5,
                         ),
                         child: TextFormField(
+                          style: TextStyle(
+                              fontFamily: 'Quicksand',
+                              fontWeight: FontWeight.w600),
                           keyboardType: TextInputType.multiline,
                           maxLines: null,
                           validator: (value) {
@@ -212,6 +227,9 @@ class _HomePageState extends State<HomePage> {
                           bottom: 5,
                         ),
                         child: TextFormField(
+                          style: TextStyle(
+                              fontFamily: 'Quicksand',
+                              fontWeight: FontWeight.w600),
                           keyboardType: TextInputType.multiline,
                           maxLines: null,
                           validator: (value) {
@@ -253,12 +271,15 @@ class _HomePageState extends State<HomePage> {
                           bottom: 5,
                         ),
                         child: TextFormField(
+                          style: TextStyle(
+                              fontFamily: 'Quicksand',
+                              fontWeight: FontWeight.w600),
                           maxLines: null,
                           validator: (value) {
                             if (value!.isEmpty) {
                               return null;
                             } else if (value
-                                .contains(RegExp(r'^[A-Za-z0-9_.]+$'))) {
+                                .contains(RegExp(r'^[A-Za-z_.]+$'))) {
                               return 'Invalid phone number';
                             } else if (value.length == 8) {
                               return null;
@@ -289,7 +310,7 @@ class _HomePageState extends State<HomePage> {
                         }
                         Scaffold.of(context).showSnackBar(
                           SnackBar(
-                            content: Text("Got it"),
+                            content: Text("Sent"),
                           ),
                         );
                         submit();
@@ -312,8 +333,9 @@ class _HomePageState extends State<HomePage> {
                           child: Text(
                             'Submit',
                             style: TextStyle(
-                              color: Colors.white,
+                              fontFamily: 'Quicksand',
                               fontWeight: FontWeight.bold,
+                              color: Colors.white,
                               fontSize: 18,
                             ),
                           ),
